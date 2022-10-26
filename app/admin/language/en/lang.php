@@ -42,6 +42,7 @@ return [
     'text_resetting' => 'Restableciendo...',
     'text_loading' => 'Cargando...',
     'text_deleting' => 'Eliminando...',
+    'text_support' => 'Centro de ayuda',
     'text_about_tastyigniter' => 'Acerca de Tastyigniter',
     'text_documentation' => 'Documentación',
     'text_community_support' => 'Comunidad de Soporte',
