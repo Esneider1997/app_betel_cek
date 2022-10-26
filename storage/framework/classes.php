@@ -136,4 +136,12 @@
   'Thoughtco\\Reports\\FormWidgets\\QueryBuilder' => 'extensions\\thoughtco\\reports\\formwidgets\\QueryBuilder.php',
   'igniter\\pages\\Controllers\\menus' => 'extensions\\igniter\\pages\\controllers\\menus.php',
   'CupNoodles\\TaxClasses\\Requests\\TaxClasses' => 'extensions\\cupnoodles\\taxclasses\\requests\\TaxClasses.php',
+  'IgniterLabs\\GiftUp\\Models\\Settings' => 'extensions\\igniterlabs\\giftup\\models\\Settings.php',
+  'igniterlabs\\smsnotify\\Controllers\\channels' => 'extensions\\igniterlabs\\smsnotify\\controllers\\channels.php',
+  'IgniterLabs\\SmsNotify\\Models\\Channel' => 'extensions\\igniterlabs\\smsnotify\\models\\Channel.php',
+  'IgniterLabs\\SmsNotify\\Classes\\BaseChannel' => 'extensions\\igniterlabs\\smsnotify\\classes\\BaseChannel.php',
+  'IgniterLabs\\SmsNotify\\SmsChannels\\Twilio' => 'extensions\\igniterlabs\\smsnotify\\smschannels\\Twilio.php',
+  'IgniterLabs\\SmsNotify\\SmsChannels\\Nexmo' => 'extensions\\igniterlabs\\smsnotify\\smschannels\\Nexmo.php',
+  'IgniterLabs\\SmsNotify\\SmsChannels\\Clickatell' => 'extensions\\igniterlabs\\smsnotify\\smschannels\\Clickatell.php',
+  'IgniterLabs\\SmsNotify\\SmsChannels\\Plivo' => 'extensions\\igniterlabs\\smsnotify\\smschannels\\Plivo.php',
 );

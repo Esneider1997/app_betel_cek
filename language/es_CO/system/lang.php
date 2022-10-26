@@ -524,7 +524,7 @@ return [
     'system_logs' => [
         'text_title' => 'Logs del sistema',
 
-        'button_empty' => '<i class="fa fa-eraser"></i>&nbsp;&nbsp;Registros vacíos',
+        'button_empty' => '<i class="fa fa-eraser"></i>&nbsp;&nbsp;Registros vacío',
         'button_request_logs' => '<i class="fa fa-globe"></i>&nbsp;&nbsp;Registros de Peticiones',
     ],
 
