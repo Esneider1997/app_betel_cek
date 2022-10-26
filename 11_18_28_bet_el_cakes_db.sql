@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2022 a las 17:53:35
+-- Tiempo de generación: 26-10-2022 a las 22:36:20
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -436,7 +436,8 @@ INSERT INTO `btl_currencies` (`currency_id`, `country_id`, `currency_name`, `cur
 (2, 223, 'US Dollar', 'USD', '$', '0.00000000', 0, ',', '.', '2', 'US', 'USA', 840, 0, '2022-10-26 15:20:37', '2022-10-26 20:20:37'),
 (3, 44, 'Yuan Renminbi', 'CNY', '¥', '0.00000000', 0, ',', '.', '2', 'CN', 'CHN', 156, 0, '2022-10-26 15:20:37', '2022-10-26 20:20:37'),
 (4, 13, 'Australian Dollar', 'AUD', '$', '0.00000000', 0, ',', '.', '2', 'AU', 'AUS', 36, 1, '2022-10-26 15:20:37', '2022-10-26 20:20:37'),
-(5, 156, 'Naira', 'NGN', '₦', '0.00000000', 0, ',', '.', '2', 'NG', 'NGA', 566, 1, '2022-10-26 15:20:37', '2022-10-26 20:20:37');
+(5, 156, 'Naira', 'NGN', '₦', '0.00000000', 0, ',', '.', '2', 'NG', 'NGA', 566, 1, '2022-10-26 15:20:37', '2022-10-26 20:20:37'),
+(6, 47, 'COP Peso Colombiano', 'COP', '$', '0.00000000', 0, ',', '.', '3', NULL, NULL, NULL, 1, '2022-10-26 17:18:49', '2022-10-26 22:18:49');
 
 -- --------------------------------------------------------
 
@@ -520,7 +521,13 @@ INSERT INTO `btl_extensions` (`extension_id`, `name`, `version`) VALUES
 (10, 'SussexCoder.Poll', 'v1.0.0'),
 (11, 'thoughtco.reports', '2.0.4'),
 (12, 'igniter.automation', 'v1.6.1'),
-(13, 'igniter.pages', 'v1.9.3');
+(13, 'igniter.pages', 'v1.9.3'),
+(14, 'thoughtco.kitchendisplay', '2.3.0'),
+(15, 'igniter.socialite', 'v1.5.3'),
+(16, 'igniter.broadcast', 'v1.4.5'),
+(17, 'igniter.api', 'v1.6.0'),
+(18, 'cupnoodles.taxclasses', '1.0.0'),
+(19, 'igniterlabs.giftup', 'v1.0.1');
 
 -- --------------------------------------------------------
 
@@ -626,6 +633,58 @@ INSERT INTO `btl_igniterlabs_smsnotify_templates` (`id`, `code`, `name`, `conten
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `btl_igniter_api_access_tokens`
+--
+
+CREATE TABLE `btl_igniter_api_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `btl_igniter_api_resources`
+--
+
+CREATE TABLE `btl_igniter_api_resources` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `endpoint` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `controller` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_custom` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `btl_igniter_api_resources`
+--
+
+INSERT INTO `btl_igniter_api_resources` (`id`, `name`, `endpoint`, `controller`, `description`, `meta`, `is_custom`) VALUES
+(1, 'Categories', 'categories', 'Igniter\\Api\\ApiResources\\Categories', 'An API resource for categories', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"all\",\"show\":\"all\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(2, 'Currencies', 'currencies', 'Igniter\\Api\\ApiResources\\Currencies', 'An API resource for currencies', '{\"actions\":[\"index\"],\"authorization\":{\"index\":\"all\"}}', 0),
+(3, 'Customers', 'customers', 'Igniter\\Api\\ApiResources\\Customers', 'An API resource for customers', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"admin\",\"show\":\"admin\",\"store\":\"users\",\"update\":\"users\",\"destroy\":\"admin\"}}', 0),
+(4, 'Locations', 'locations', 'Igniter\\Api\\ApiResources\\Locations', 'An API resource for locations', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"all\",\"show\":\"admin\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(5, 'Menus', 'menus', 'Igniter\\Api\\ApiResources\\Menus', 'An API resource for menus', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"all\",\"show\":\"all\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(6, 'MenuOptions', 'menu_options', 'Igniter\\Api\\ApiResources\\MenuOptions', 'An API resource for Menu options', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"admin\",\"show\":\"admin\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(7, 'MenuItemOptions', 'menu_item_options', 'Igniter\\Api\\ApiResources\\MenuItemOptions', 'An API resource for Menu item options', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"admin\",\"show\":\"admin\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(8, 'Orders', 'orders', 'Igniter\\Api\\ApiResources\\Orders', 'An API resource for orders', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"users\",\"show\":\"users\",\"store\":\"users\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(9, 'Reservations', 'reservations', 'Igniter\\Api\\ApiResources\\Reservations', 'An API resource for reservations', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"users\",\"show\":\"users\",\"store\":\"users\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(10, 'Reviews', 'reviews', 'Igniter\\Api\\ApiResources\\Reviews', 'An API resource for reviews', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"users\",\"show\":\"users\",\"store\":\"users\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(11, 'Tables', 'tables', 'Igniter\\Api\\ApiResources\\Tables', 'An API resource for tables', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"admin\",\"show\":\"admin\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0),
+(12, 'Coupons', 'coupons', 'Igniter\\Coupons\\ApiResources\\Coupons', 'An API resource for coupons', '{\"actions\":[\"index\",\"show\",\"store\",\"update\",\"destroy\"],\"authorization\":{\"index\":\"all\",\"show\":\"all\",\"store\":\"admin\",\"update\":\"admin\",\"destroy\":\"admin\"}}', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `btl_igniter_automation_logs`
 --
 
@@ -660,6 +719,14 @@ CREATE TABLE `btl_igniter_automation_rules` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `btl_igniter_automation_rules`
+--
+
+INSERT INTO `btl_igniter_automation_rules` (`id`, `name`, `code`, `description`, `event_class`, `config_data`, `is_custom`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Envía un mensaje para dejar una reseña después de 24 horas', 'chase_review_after_one_day', '', 'Igniter\\Automation\\AutomationRules\\Events\\OrderSchedule', NULL, 0, 0, '2022-10-26 22:03:18', '2022-10-26 22:03:18'),
+(2, 'Send an SMS message when an order status is updated', 'smsnotify_new_order_status', '', 'Igniter\\Cart\\AutomationRules\\Events\\NewOrderStatus', NULL, 0, 0, '2022-10-26 22:03:18', '2022-10-26 22:03:18');
+
 -- --------------------------------------------------------
 
 --
@@ -675,6 +742,14 @@ CREATE TABLE `btl_igniter_automation_rule_actions` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `btl_igniter_automation_rule_actions`
+--
+
+INSERT INTO `btl_igniter_automation_rule_actions` (`id`, `automation_rule_id`, `class_name`, `options`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Igniter\\Automation\\AutomationRules\\Actions\\SendMailTemplate', '{\"template\":\"igniter.local::mail.review_chase\",\"send_to\":\"customer\"}', '2022-10-26 22:03:18', '2022-10-26 22:03:18'),
+(2, 2, 'IgniterLabs\\SmsNotify\\AutomationRules\\Actions\\SendSmsNotification', '{\"template\":\"igniterlabs.smsnotify::_sms.order_status_changed\",\"send_to\":\"customer\"}', '2022-10-26 22:03:18', '2022-10-26 22:03:18');
+
 -- --------------------------------------------------------
 
 --
@@ -689,6 +764,14 @@ CREATE TABLE `btl_igniter_automation_rule_conditions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `btl_igniter_automation_rule_conditions`
+--
+
+INSERT INTO `btl_igniter_automation_rule_conditions` (`id`, `automation_rule_id`, `class_name`, `options`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Igniter\\Local\\AutomationRules\\Conditions\\ReviewCount', '[{\"attribute\":\"review_count\",\"value\":\"0\",\"operator\":\"is\"}]', '2022-10-26 22:03:18', '2022-10-26 22:03:18'),
+(2, 1, 'Igniter\\Cart\\AutomationRules\\Conditions\\OrderAttribute', '[{\"attribute\":\"hours_since\",\"value\":\"24\",\"operator\":\"is\"}]', '2022-10-26 22:03:18', '2022-10-26 22:03:18');
 
 -- --------------------------------------------------------
 
@@ -965,6 +1048,21 @@ CREATE TABLE `btl_igniter_reviews` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `btl_igniter_socialite_providers`
+--
+
+CREATE TABLE `btl_igniter_socialite_providers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `btl_jobs`
 --
 
@@ -1022,7 +1120,8 @@ CREATE TABLE `btl_languages` (
 --
 
 INSERT INTO `btl_languages` (`language_id`, `code`, `name`, `image`, `idiom`, `status`, `can_delete`, `original_id`, `created_at`, `updated_at`, `version`) VALUES
-(1, 'en', 'English', NULL, 'english', 1, 0, NULL, '2022-10-26 20:20:37', '2022-10-26 20:20:37', NULL);
+(1, 'en', 'English', NULL, 'english', 0, 0, NULL, '2022-10-26 20:20:37', '2022-10-26 16:27:18', NULL),
+(2, 'es_CO', 'Spanish, Colombia', NULL, '', 1, 0, NULL, '2022-10-26 22:06:15', '2022-10-26 22:06:37', 'v3.4.0+434_20220425101748');
 
 -- --------------------------------------------------------
 
@@ -1109,7 +1208,7 @@ CREATE TABLE `btl_locations` (
 --
 
 INSERT INTO `btl_locations` (`location_id`, `location_name`, `location_email`, `description`, `location_address_1`, `location_address_2`, `location_city`, `location_state`, `location_postcode`, `location_country_id`, `location_telephone`, `location_lat`, `location_lng`, `location_radius`, `location_status`, `permalink_slug`, `created_at`, `updated_at`) VALUES
-(1, 'Default', 'admin@restaurant.com', NULL, 'Broad Ln', NULL, 'Coventry', NULL, NULL, 222, '8765456789', 52.415884, -1.603648, NULL, 1, 'default', '2022-10-26 20:20:37', '2022-10-26 20:20:37');
+(1, 'Default', 'vemato1807@gmail.com', '', 'calle 56 #15e- 23', '', 'Soledad', 'Atlantico', '083004', 47, '301 3844993', 52.415884, -1.603648, NULL, 1, 'default', '2022-10-26 20:20:37', '2022-10-26 17:14:09');
 
 -- --------------------------------------------------------
 
@@ -1141,6 +1240,41 @@ CREATE TABLE `btl_location_options` (
   `item` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`value`))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `btl_location_options`
+--
+
+INSERT INTO `btl_location_options` (`id`, `location_id`, `item`, `value`) VALUES
+(1, 1, 'auto_lat_lng', '\"1\"'),
+(2, 1, 'gallery', '{\"title\":\"\",\"description\":\"\"}'),
+(3, 1, 'guest_order', '\"-1\"'),
+(4, 1, 'limit_orders', '\"0\"'),
+(5, 1, 'offer_delivery', '\"1\"'),
+(6, 1, 'delivery_add_lead_time', '\"0\"'),
+(7, 1, 'delivery_time_interval', '15'),
+(8, 1, 'delivery_lead_time', '25'),
+(9, 1, 'delivery_time_restriction', '\"0\"'),
+(10, 1, 'delivery_cancellation_timeout', '0'),
+(11, 1, 'delivery_min_order_amount', '\"0.00\"'),
+(12, 1, 'future_orders', '{\"enable_delivery\":\"0\",\"enable_collection\":\"0\"}'),
+(13, 1, 'offer_collection', '\"1\"'),
+(14, 1, 'collection_add_lead_time', '\"0\"'),
+(15, 1, 'collection_time_interval', '15'),
+(16, 1, 'collection_lead_time', '25'),
+(17, 1, 'collection_time_restriction', '\"0\"'),
+(18, 1, 'collection_cancellation_timeout', '0'),
+(19, 1, 'collection_min_order_amount', '\"0.00\"'),
+(20, 1, 'payments', '\"0\"'),
+(21, 1, 'offer_reservation', '\"1\"'),
+(22, 1, 'auto_allocate_table', '\"1\"'),
+(23, 1, 'reservation_time_interval', '15'),
+(24, 1, 'reservation_stay_time', '45'),
+(25, 1, 'min_reservation_advance_time', '2'),
+(26, 1, 'max_reservation_advance_time', '30'),
+(27, 1, 'limit_guests', '\"0\"'),
+(28, 1, 'reservation_cancellation_timeout', '0'),
+(29, 1, 'reservation_include_start_time', '\"1\"');
 
 -- --------------------------------------------------------
 
@@ -1292,7 +1426,8 @@ CREATE TABLE `btl_media_attachments` (
 --
 
 INSERT INTO `btl_media_attachments` (`id`, `disk`, `name`, `file_name`, `mime_type`, `size`, `tag`, `attachment_type`, `attachment_id`, `is_public`, `custom_properties`, `priority`, `created_at`, `updated_at`) VALUES
-(1, 'media', '635955e87e799053389277.png', 'slide.png', 'image/jpeg', 748127, 'images', 'sliders', 1, 1, '[]', 1, '2022-10-26 21:44:40', '2022-10-26 21:44:40');
+(1, 'media', '635955e87e799053389277.png', 'slide.png', 'image/jpeg', 748127, 'images', 'sliders', 1, 1, '[]', 1, '2022-10-26 21:44:40', '2022-10-26 21:44:40'),
+(2, 'media', '635962012bdeb275573136.png', 'bet-el cake.png', 'image/png', 215155, 'thumb', 'locations', 1, 1, '[]', 2, '2022-10-26 16:36:17', '2022-10-26 16:36:17');
 
 -- --------------------------------------------------------
 
@@ -1310,7 +1445,8 @@ CREATE TABLE `btl_menus` (
   `menu_priority` int(11) NOT NULL DEFAULT 0,
   `order_restriction` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `tax_class_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1552,7 +1688,21 @@ INSERT INTO `btl_migrations` (`id`, `group`, `migration`, `batch`) VALUES
 (110, 'igniter.pages', '2019_11_28_000400_alter_columns_on_pages_table', 1),
 (111, 'igniter.pages', '2021_03_31_000300_seed_menus_table', 1),
 (112, 'igniter.pages', '2021_09_06_010000_add_timestamps_to_pages', 1),
-(113, 'igniter.pages', '2021_10_20_010000_add_foreign_key_constraints_to_tables', 1);
+(113, 'igniter.pages', '2021_10_20_010000_add_foreign_key_constraints_to_tables', 1),
+(114, 'thoughtco.kitchendisplay', '2020_10_12_setup_kitchendisplay_tables', 1),
+(115, 'thoughtco.kitchendisplay', '2020_12_12_alter_category_field', 1),
+(116, 'thoughtco.kitchendisplay', '2021_02_16_alter_order_status_field', 1),
+(117, 'thoughtco.kitchendisplay', '2021_02_16_alter_order_types_field', 1),
+(118, 'igniter.socialite', '2018_10_11_211028_create_socialite_providers_table', 1),
+(119, 'igniter.socialite', '2022_02_04_211028_add_user_type_column_socialite_providers_table', 1),
+(120, 'igniter.socialite', '2022_06_14_211028_increase_string_length', 1),
+(121, 'igniter.broadcast', '2021_10_15_000400_create_websockets_statistics_entries_table', 1),
+(122, 'igniter.api', '2018_10_12_000300_create_resources_table', 1),
+(123, 'igniter.api', '2020_04_27_000300_update_class_names_api_resources_table', 1),
+(124, 'igniter.api', '2020_05_18_000300_create_access_tokens_table', 1),
+(125, 'igniter.api', '2020_11_11_000300_alter_resources_table', 1),
+(126, 'igniter.api', '2021_11_18_010000_make_primary_key_bigint_all_tables', 1),
+(127, 'cupnoodles.taxclasses', '2021_05_18_010000_add_tax_classes', 1);
 
 -- --------------------------------------------------------
 
@@ -1672,9 +1822,9 @@ CREATE TABLE `btl_pages` (
 --
 
 INSERT INTO `btl_pages` (`page_id`, `language_id`, `title`, `content`, `meta_description`, `meta_keywords`, `created_at`, `updated_at`, `status`, `permalink_slug`, `layout`, `metadata`, `priority`) VALUES
-(1, 1, 'About Us', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 16:48:59', 1, 'about-us', 'static', '{\"navigation\":\"0\"}', NULL),
-(2, 1, 'Policy', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 16:48:59', 1, 'policy', 'static', '{\"navigation\":\"0\"}', NULL),
-(3, 1, 'Terms and Conditions', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 16:48:59', 1, 'terms-and-conditions', 'static', '{\"navigation\":\"0\"}', NULL);
+(1, 2, 'About Us', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 14:21:10', 1, 'about-us', 'static.blade', '{\"navigation_hidden\":\"0\"}', NULL),
+(2, 2, 'Policy', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 14:20:55', 1, 'policy', 'static.blade', '{\"navigation_hidden\":\"0\"}', NULL),
+(3, 2, 'Terms and Conditions', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', '', '', '2022-10-26 16:48:59', '2022-10-26 14:21:21', 1, 'terms-and-conditions', 'static.blade', '{\"navigation_hidden\":\"0\"}', NULL);
 
 -- --------------------------------------------------------
 
@@ -1768,7 +1918,10 @@ CREATE TABLE `btl_request_logs` (
 --
 
 INSERT INTO `btl_request_logs` (`id`, `url`, `status_code`, `referrer`, `count`, `created_at`, `updated_at`) VALUES
-(1, 'http://localhost/testigniter/login', 404, NULL, 1, '2022-10-26 21:38:33', '2022-10-26 21:38:33');
+(1, 'http://localhost/testigniter/login', 404, NULL, 1, '2022-10-26 21:38:33', '2022-10-26 21:38:33'),
+(2, 'http://localhost/testigniter/index.html', 404, NULL, 1, '2022-10-26 22:16:28', '2022-10-26 22:16:28'),
+(3, 'http://localhost/testigniter/default/menus', 404, '[\"http:\\/\\/localhost\\/testigniter\\/default\\/reservation\"]', 1, '2022-10-26 17:02:47', '2022-10-26 17:02:47'),
+(4, 'http://localhost/testigniter', 404, NULL, 1, '2022-10-26 17:02:50', '2022-10-26 17:02:50');
 
 -- --------------------------------------------------------
 
@@ -1849,11 +2002,11 @@ CREATE TABLE `btl_settings` (
 INSERT INTO `btl_settings` (`setting_id`, `sort`, `item`, `value`, `serialized`) VALUES
 (1, 'prefs', 'default_location_id', '1', NULL),
 (2, 'config', 'site_logo', '/bet-el cake.png', NULL),
-(3, 'config', 'country_id', '222', NULL),
-(4, 'config', 'timezone', 'Europe/London', NULL),
-(5, 'config', 'default_currency_code', 'GBP', NULL),
-(6, 'config', 'default_language', 'en', NULL),
-(7, 'config', 'detect_language', '0', NULL),
+(3, 'config', 'country_id', '47', NULL),
+(4, 'config', 'timezone', 'America/Bogota', NULL),
+(5, 'config', 'default_currency_code', '6', NULL),
+(6, 'config', 'default_language', 'es_CO', NULL),
+(7, 'config', 'detect_language', '1', NULL),
 (9, 'config', 'allow_registration', '1', NULL),
 (10, 'config', 'customer_group_id', '11', NULL),
 (14, 'config', 'maps_api_key', '', NULL),
@@ -1869,9 +2022,9 @@ INSERT INTO `btl_settings` (`setting_id`, `sort`, `item`, `value`, `serialized`)
 (26, 'config', 'confirmed_reservation_status', '6', NULL),
 (27, 'config', 'canceled_order_status', '9', NULL),
 (28, 'config', 'canceled_reservation_status', '7', NULL),
-(30, 'config', 'tax_mode', '0', NULL),
+(30, 'config', 'tax_mode', '1', NULL),
 (31, 'config', 'invoice_prefix', 'INV-{year}-00', NULL),
-(32, 'config', 'protocol', 'log', NULL),
+(32, 'config', 'protocol', 'sendmail', NULL),
 (33, 'config', 'smtp_host', 'smtp.mailgun.org', NULL),
 (34, 'config', 'smtp_port', '587', NULL),
 (35, 'config', 'smtp_user', '', NULL),
@@ -1886,7 +2039,7 @@ INSERT INTO `btl_settings` (`setting_id`, `sort`, `item`, `value`, `serialized`)
 (45, 'prefs', 'ti_version', 'v3.5.5', NULL),
 (46, 'prefs', 'sys_hash', 'fa8e6939a54fc58e957d2927dfe00c3f9fd5c596', NULL),
 (47, 'prefs', 'site_key', '578539a2ab00394e09be86ef9c81b621b3e55629', NULL),
-(48, 'config', 'supported_languages.0', 'en', NULL),
+(48, 'config', 'supported_languages.0', 'es_CO', NULL),
 (49, 'config', 'registration_email.0', 'customer', NULL),
 (50, 'config', 'order_email.0', 'customer', NULL),
 (51, 'config', 'order_email.1', 'admin', NULL),
@@ -1938,7 +2091,38 @@ INSERT INTO `btl_settings` (`setting_id`, `sort`, `item`, `value`, `serialized`)
 (99, 'prefs', 'carte_info.updated_at', '2022-10-26T15:18:40.000000Z', NULL),
 (100, 'prefs', 'carte_info.created_at', '2022-10-26T14:15:09.000000Z', NULL),
 (105, 'prefs', 'default_themes.main', 'tastyigniter-orange', NULL),
-(106, 'config', 'default_geocoder', 'chain', NULL);
+(106, 'config', 'default_geocoder', 'chain', NULL),
+(108, 'config', 'currency_converter.api', 'openexchangerates', NULL),
+(109, 'config', 'currency_converter.oer.apiKey', '', NULL),
+(110, 'config', 'currency_converter.fixerio.apiKey', '', NULL),
+(111, 'config', 'currency_converter.refreshInterval', '24', NULL),
+(112, 'config', 'tax_percentage', '0', NULL),
+(113, 'config', 'tax_menu_price', '0', NULL),
+(114, 'config', 'tax_delivery_charge', '0', NULL),
+(115, 'prefs', 'admin_dashboardwidgets_default_dashboard.onboarding.class', 'Admin\\DashboardWidgets\\Onboarding', NULL),
+(116, 'prefs', 'admin_dashboardwidgets_default_dashboard.onboarding.priority', '1', NULL),
+(117, 'prefs', 'admin_dashboardwidgets_default_dashboard.onboarding.config.title', 'admin::lang.dashboard.onboarding.title', NULL),
+(118, 'prefs', 'admin_dashboardwidgets_default_dashboard.onboarding.config.width', '6', NULL),
+(119, 'prefs', 'admin_dashboardwidgets_default_dashboard.news.class', 'System\\DashboardWidgets\\News', NULL),
+(120, 'prefs', 'admin_dashboardwidgets_default_dashboard.news.priority', '2', NULL),
+(121, 'prefs', 'admin_dashboardwidgets_default_dashboard.news.config.title', 'admin::lang.dashboard.text_news', NULL),
+(122, 'prefs', 'admin_dashboardwidgets_default_dashboard.news.config.width', '6', NULL),
+(123, 'prefs', 'admin_dashboardwidgets_default_dashboard.order_stats.class', 'Admin\\DashboardWidgets\\Statistics', NULL),
+(124, 'prefs', 'admin_dashboardwidgets_default_dashboard.order_stats.priority', '3', NULL),
+(125, 'prefs', 'admin_dashboardwidgets_default_dashboard.order_stats.config.context', 'sale', NULL),
+(126, 'prefs', 'admin_dashboardwidgets_default_dashboard.order_stats.config.width', '4', NULL),
+(127, 'prefs', 'admin_dashboardwidgets_default_dashboard.reservation_stats.class', 'Admin\\DashboardWidgets\\Statistics', NULL),
+(128, 'prefs', 'admin_dashboardwidgets_default_dashboard.reservation_stats.priority', '4', NULL),
+(129, 'prefs', 'admin_dashboardwidgets_default_dashboard.reservation_stats.config.context', 'lost_sale', NULL),
+(130, 'prefs', 'admin_dashboardwidgets_default_dashboard.reservation_stats.config.width', '4', NULL),
+(131, 'prefs', 'admin_dashboardwidgets_default_dashboard.customer_stats.class', 'Admin\\DashboardWidgets\\Statistics', NULL),
+(132, 'prefs', 'admin_dashboardwidgets_default_dashboard.customer_stats.priority', '5', NULL),
+(133, 'prefs', 'admin_dashboardwidgets_default_dashboard.customer_stats.config.context', 'cash_payment', NULL),
+(134, 'prefs', 'admin_dashboardwidgets_default_dashboard.customer_stats.config.width', '4', NULL),
+(135, 'prefs', 'admin_dashboardwidgets_default_dashboard.charts.class', 'Admin\\DashboardWidgets\\Charts', NULL),
+(136, 'prefs', 'admin_dashboardwidgets_default_dashboard.charts.priority', '6', NULL),
+(137, 'prefs', 'admin_dashboardwidgets_default_dashboard.charts.config.title', 'admin::lang.dashboard.text_reports_chart', NULL),
+(138, 'prefs', 'admin_dashboardwidgets_default_dashboard.charts.config.width', '12', NULL);
 
 -- --------------------------------------------------------
 
@@ -2180,6 +2364,19 @@ INSERT INTO `btl_tables` (`table_id`, `table_name`, `min_capacity`, `max_capacit
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `btl_tax_classes`
+--
+
+CREATE TABLE `btl_tax_classes` (
+  `tax_class_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rate` decimal(6,4) NOT NULL,
+  `apply_to_delivery` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `btl_themes`
 --
 
@@ -2201,10 +2398,30 @@ CREATE TABLE `btl_themes` (
 --
 
 INSERT INTO `btl_themes` (`theme_id`, `name`, `code`, `description`, `version`, `data`, `status`, `is_default`, `created_at`, `updated_at`) VALUES
-(1, 'Demo Theme', 'demo', 'Demonstration theme for TastyIgniter front-end', '0.1.0', NULL, 1, 0, NULL, '2022-10-26 21:49:09'),
-(2, 'Orange Theme', 'tastyigniter-orange', 'Free Modern, Responsive and Clean TastyIgniter Theme based on Bootstrap.', '0.1.0', NULL, 1, 0, NULL, '2022-10-26 21:49:09'),
-(3, 'TastyIgniter Red', 'tastyigniter-red', 'TastyIgniter Theme - Red', '0.0.1', NULL, 1, 0, NULL, '2022-10-26 21:49:09'),
-(4, 'Orange Theme [child]', 'tastyigniter-orange-yhp', 'Free Modern, Responsive and Clean TastyIgniter Theme based on Bootstrap.', '0.0.1', '[]', 1, 0, NULL, '2022-10-26 21:49:09');
+(1, 'Demo Theme', 'demo', 'Demonstration theme for TastyIgniter front-end', '0.1.0', NULL, 1, 0, NULL, '2022-10-26 19:20:27'),
+(2, 'Orange Theme', 'tastyigniter-orange', 'Free Modern, Responsive and Clean TastyIgniter Theme based on Bootstrap.', 'v3.0.0', '{\"logo_image\":\"\\/bet-el cake.png\",\"favicon\":\"\\/bet-el cake.png\",\"logo_text\":\"Bet-el Cakes\",\"logo_height\":\"40px\",\"font.family\":\"\\\"Titillium Web\\\",Arial,sans-serif\",\"font.weight\":\"400\",\"body.background\":\"#F5F5F5\",\"font.color\":\"#181718\",\"button.primary.background\":\"#F2598D\",\"button.default.background\":\"#64544D\",\"button.success.background\":\"#28A745\",\"button.info.background\":\"#17A2B8\",\"button.warning.background\":\"#FFC107\",\"button.danger.background\":\"#DC3545\",\"button.light.background\":\"#EFEDED\",\"button.dark.background\":\"#372B27\",\"heading.background\":\"#9F88B3\",\"heading.color\":\"#FFFFFF\",\"footer.background\":\"#9F88B3\",\"footer.font_color\":\"#282727\",\"ga_tracking_code\":\"\",\"custom_css\":\"\",\"custom_js\":\"\",\"enable_gdpr\":\"1\",\"gdpr_cookie_message\":\"We use own and third party cookies to improve our services. If you continue to browse, consider accepting its use\",\"gdpr_accept_text\":\"OK\",\"gdpr_more_info_text\":\"More Information\",\"gdpr_more_info_link\":\"1\",\"gdpr_background_color\":\"#FFFFFF\",\"gdpr_text_color\":\"#000000\",\"social\":[]}', 1, 0, NULL, '2022-10-26 19:20:27'),
+(3, 'TastyIgniter Red', 'tastyigniter-red', 'TastyIgniter Theme - Red', '0.0.1', NULL, 1, 0, NULL, '2022-10-26 19:20:27'),
+(4, 'Orange Theme [child]', 'tastyigniter-orange-yhp', 'Free Modern, Responsive and Clean TastyIgniter Theme based on Bootstrap.', '0.0.1', '[]', 1, 0, NULL, '2022-10-26 19:20:27');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `btl_thoughtco_kitchendisplay`
+--
+
+CREATE TABLE `btl_thoughtco_kitchendisplay` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `locations` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `categories` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_assigned` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_status` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `order_types` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `display` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_enabled` tinyint(1) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2259,7 +2476,7 @@ CREATE TABLE `btl_users` (
 --
 
 INSERT INTO `btl_users` (`user_id`, `staff_id`, `username`, `password`, `super_user`, `reset_code`, `reset_time`, `activation_code`, `remember_token`, `is_activated`, `date_activated`, `last_login`, `last_seen`, `created_at`, `updated_at`) VALUES
-(1, 1, 'admin_vamato', '$2y$10$4uKyLEE5JhvjfGN8iQ7pUefVdtGIf4ujsMPQGXPf5ZHdXxpSSWC.e', 1, NULL, NULL, NULL, 'Y0vQRwGuw0x1UK7cf73bFOqcPtPfS938KTK4hqQ2k0', 1, '2022-10-26 15:20:37', '2022-10-26 16:38:50', NULL, NULL, NULL);
+(1, 1, 'admin_vamato', '$2y$10$4uKyLEE5JhvjfGN8iQ7pUefVdtGIf4ujsMPQGXPf5ZHdXxpSSWC.e', 1, NULL, NULL, NULL, 'UjbOVS2SEP6BsCw2XPaTg2rMccQGX84ObY51FUBBw5', 1, '2022-10-26 15:20:37', '2022-10-26 11:28:19', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2272,6 +2489,22 @@ CREATE TABLE `btl_user_preferences` (
   `user_id` int(11) NOT NULL,
   `item` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `btl_websockets_statistics_entries`
+--
+
+CREATE TABLE `btl_websockets_statistics_entries` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `app_id` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `peak_connection_count` int(11) NOT NULL,
+  `websocket_message_count` int(11) NOT NULL,
+  `api_message_count` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -2434,6 +2667,20 @@ ALTER TABLE `btl_igniterlabs_smsnotify_templates`
   ADD UNIQUE KEY `btl_igniterlabs_smsnotify_templates_code_unique` (`code`);
 
 --
+-- Indices de la tabla `btl_igniter_api_access_tokens`
+--
+ALTER TABLE `btl_igniter_api_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `btl_igniter_api_access_tokens_token_unique` (`token`),
+  ADD KEY `btl_igniter_api_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indices de la tabla `btl_igniter_api_resources`
+--
+ALTER TABLE `btl_igniter_api_resources`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `btl_igniter_automation_logs`
 --
 ALTER TABLE `btl_igniter_automation_logs`
@@ -2537,6 +2784,14 @@ ALTER TABLE `btl_igniter_pages_menu_items`
 ALTER TABLE `btl_igniter_reviews`
   ADD PRIMARY KEY (`review_id`),
   ADD KEY `btl_igniter_reviews_review_id_sale_type_sale_id_index` (`review_id`,`sale_type`,`sale_id`);
+
+--
+-- Indices de la tabla `btl_igniter_socialite_providers`
+--
+ALTER TABLE `btl_igniter_socialite_providers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `provider_token_index` (`provider`,`token`),
+  ADD KEY `btl_igniter_socialite_providers_user_id_index` (`user_id`);
 
 --
 -- Indices de la tabla `btl_jobs`
@@ -2828,11 +3083,23 @@ ALTER TABLE `btl_tables`
   ADD PRIMARY KEY (`table_id`);
 
 --
+-- Indices de la tabla `btl_tax_classes`
+--
+ALTER TABLE `btl_tax_classes`
+  ADD PRIMARY KEY (`tax_class_id`);
+
+--
 -- Indices de la tabla `btl_themes`
 --
 ALTER TABLE `btl_themes`
   ADD PRIMARY KEY (`theme_id`),
   ADD UNIQUE KEY `btl_themes_code_unique` (`code`);
+
+--
+-- Indices de la tabla `btl_thoughtco_kitchendisplay`
+--
+ALTER TABLE `btl_thoughtco_kitchendisplay`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `btl_thoughtco_reportbuilder`
@@ -2852,6 +3119,12 @@ ALTER TABLE `btl_users`
 -- Indices de la tabla `btl_user_preferences`
 --
 ALTER TABLE `btl_user_preferences`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `btl_websockets_statistics_entries`
+--
+ALTER TABLE `btl_websockets_statistics_entries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -2905,7 +3178,7 @@ ALTER TABLE `btl_countries`
 -- AUTO_INCREMENT de la tabla `btl_currencies`
 --
 ALTER TABLE `btl_currencies`
-  MODIFY `currency_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `currency_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_customers`
@@ -2923,7 +3196,7 @@ ALTER TABLE `btl_customer_groups`
 -- AUTO_INCREMENT de la tabla `btl_extensions`
 --
 ALTER TABLE `btl_extensions`
-  MODIFY `extension_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `extension_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_extension_settings`
@@ -2956,6 +3229,18 @@ ALTER TABLE `btl_igniterlabs_smsnotify_templates`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT de la tabla `btl_igniter_api_access_tokens`
+--
+ALTER TABLE `btl_igniter_api_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `btl_igniter_api_resources`
+--
+ALTER TABLE `btl_igniter_api_resources`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de la tabla `btl_igniter_automation_logs`
 --
 ALTER TABLE `btl_igniter_automation_logs`
@@ -2965,19 +3250,19 @@ ALTER TABLE `btl_igniter_automation_logs`
 -- AUTO_INCREMENT de la tabla `btl_igniter_automation_rules`
 --
 ALTER TABLE `btl_igniter_automation_rules`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_igniter_automation_rule_actions`
 --
 ALTER TABLE `btl_igniter_automation_rule_actions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_igniter_automation_rule_conditions`
 --
 ALTER TABLE `btl_igniter_automation_rule_conditions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_igniter_coupons`
@@ -3028,6 +3313,12 @@ ALTER TABLE `btl_igniter_reviews`
   MODIFY `review_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `btl_igniter_socialite_providers`
+--
+ALTER TABLE `btl_igniter_socialite_providers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `btl_jobs`
 --
 ALTER TABLE `btl_jobs`
@@ -3037,7 +3328,7 @@ ALTER TABLE `btl_jobs`
 -- AUTO_INCREMENT de la tabla `btl_languages`
 --
 ALTER TABLE `btl_languages`
-  MODIFY `language_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `language_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_language_translations`
@@ -3061,7 +3352,7 @@ ALTER TABLE `btl_location_areas`
 -- AUTO_INCREMENT de la tabla `btl_location_options`
 --
 ALTER TABLE `btl_location_options`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_mail_layouts`
@@ -3091,7 +3382,7 @@ ALTER TABLE `btl_mealtimes`
 -- AUTO_INCREMENT de la tabla `btl_media_attachments`
 --
 ALTER TABLE `btl_media_attachments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_menus`
@@ -3133,7 +3424,7 @@ ALTER TABLE `btl_menu_option_values`
 -- AUTO_INCREMENT de la tabla `btl_migrations`
 --
 ALTER TABLE `btl_migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_orders`
@@ -3181,7 +3472,7 @@ ALTER TABLE `btl_payment_profiles`
 -- AUTO_INCREMENT de la tabla `btl_request_logs`
 --
 ALTER TABLE `btl_request_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_reservations`
@@ -3193,7 +3484,7 @@ ALTER TABLE `btl_reservations`
 -- AUTO_INCREMENT de la tabla `btl_settings`
 --
 ALTER TABLE `btl_settings`
-  MODIFY `setting_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `setting_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_staffs`
@@ -3250,10 +3541,22 @@ ALTER TABLE `btl_tables`
   MODIFY `table_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT de la tabla `btl_tax_classes`
+--
+ALTER TABLE `btl_tax_classes`
+  MODIFY `tax_class_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `btl_themes`
 --
 ALTER TABLE `btl_themes`
   MODIFY `theme_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `btl_thoughtco_kitchendisplay`
+--
+ALTER TABLE `btl_thoughtco_kitchendisplay`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_thoughtco_reportbuilder`
@@ -3271,7 +3574,13 @@ ALTER TABLE `btl_users`
 -- AUTO_INCREMENT de la tabla `btl_user_preferences`
 --
 ALTER TABLE `btl_user_preferences`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `btl_websockets_statistics_entries`
+--
+ALTER TABLE `btl_websockets_statistics_entries`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `btl_working_hours`
