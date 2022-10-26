@@ -1,0 +1,250 @@
+.nav-menus {
+  padding: 0px $spacer;
+  background-color: $white;
+  margin: 2px 0;
+
+  .nav-link {
+    color: inherit;
+    padding: $spacer;
+    border-width: 0;
+  }
+
+  .nav-link.active {
+    background-color: transparent;
+    font-weight: $font-weight-bold;
+  }
+
+  .nav-link.active,
+  .nav-link:hover {
+    border-color: transparent;
+    color: $primary;
+  }
+}
+
+.nav-categories {
+  .nav-link {
+    color: $body-color;
+  }
+
+  .nav-link.active,
+  .show > .nav-link {
+    color: $nav-pills-link-active-bg;
+    font-weight: $font-weight-bold;
+  }
+}
+
+.menu-group {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  .menu-group-item {
+    //border-top: 1px solid #DADADA;
+    
+    >span {
+      display: block;
+      width: 50%;
+      height: 1px;
+      background-color: $primary;
+      margin: auto;
+    }
+    
+    //padding-left: $card-spacer-x;
+    //padding-right: $card-spacer-x;
+
+    &:first-child {
+      border-top: 0 none;
+    }
+
+    .category-title {
+      padding: 15px 0;
+      margin-bottom: 0;
+
+      .collapse-toggle {
+        @extend .fa;
+        @extend .fa-chevron-up;
+      }
+
+      &.collapsed .collapse-toggle {
+        @extend .fa-chevron-down
+      }
+    }
+
+    .image {
+      max-height: 80px;
+      overflow: hidden;
+    }
+  }
+
+  .menu-items {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.menu-items {
+  padding-left: $card-spacer-x;
+  padding-right: $card-spacer-x;
+
+  .menu-item {
+    //border-top: 1px dashed $light;
+    //padding: $card-spacer-x 0;    
+    margin: $card-spacer-x 0;
+  }
+
+  .menu-item:first-child {
+    border-top: 0 none;
+  }
+}
+
+.menu-option, .menu-size {
+  .custom-control {
+    margin-top: 10px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .custom-quantity {
+    padding-left: 0px;
+
+    .custom-quantity-label {
+      line-height: 2.5;
+      margin-bottom: 0;
+    }
+
+    .custom-quantity-input {
+      float: left;
+      margin-right: 10px;
+      width: 60px;
+    }
+  }
+
+  .option-details, .size-details {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: -$modal-inner-padding;
+    margin-right: -$modal-inner-padding;
+    padding: 10px $modal-inner-padding;
+    background-color: rgba($light, 0.5);
+  }
+
+  .option-group, .size-group {
+    padding: $card-spacer-x 0;
+  }
+}
+
+.menu-comment {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: -$modal-inner-padding;
+  margin-right: -$modal-inner-padding;
+  padding: $card-spacer-x $modal-inner-padding 10px;
+  border-top: 1px solid $light;
+}
+
+.affix-categories, .affix-cart {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+}
+
+.menu-item-image {
+  border-radius: 3px;
+}
+
+.allergens img {
+  height: 30px;
+}
+
+// Glow effect for all the buttons (+js for those that are in components)
+.glow-button {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px lighten($primary, 30%);
+  background-color: $primary;
+  border-radius: 5px;  
+}
+
+// Center images Category and Item Modal
+div.menu-category div.image, div.modal-content>div.modal-top {
+  text-align: center;
+}
+
+//Style to Navbar active link
+.nav.navbar-nav .nav-item.active {
+  background-color: $primary;
+  border-radius: 5px;  
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 5px lighten($primary, 30%);
+}
+
+.nav.navbar-nav .nav-item.active a {
+  color: $white;
+  opacity: 1;
+}
+
+// Item modal options background text
+div.menu-option div.option-details {
+  background-color: $white;
+}
+
+div.menu-option div.option-details {
+  border-bottom: 1px solid $primary;
+  display: block;  
+  margin: auto;
+}
+
+// Some buttons GUI fix
+.btn-light, .btn-info {
+  border: none !important;
+}
+button.cart-btn {
+  color: $white !important;
+}
+
+// SPECIALS RIBBON
+
+.ribbon {
+  $default-right: 10px;
+  $default-top: -3px;
+  $default-color: $primary;
+  $default-width: 32px;
+  $default-height: 36px;
+  
+  position: absolute;
+  left: var(--right, $default-right);
+  top: var(--top, $default-top);
+  
+  filter: drop-shadow(2px 3px 2px rgba(black, 0.5));
+  
+  > .content {
+    color: white;
+    //font-size: 1.25rem;
+    text-align: center;
+    font-weight: 400;
+    background: var(--color, $default-color) linear-gradient(45deg, rgba(black, 0) 0%, rgba(white, 0.25) 100%);
+    padding: 8px 2px 4px;
+    
+    
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 100%);
+    
+    width: var(--width, $default-width);
+    min-height: var(--height, $default-height);
+    
+    transition: clip-path 1s, padding 1s, background 1s;
+  }
+  
+  &.down > .content {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), 50% 100%, 0 calc(100% - 8px));
+  }
+  
+  &.up > .content {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% calc(100% - 8px), 0 100%);
+  }
+  
+  &.check > .content {
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 40% 100%, 0 calc(100% - 12px));
+  }
+}

@@ -1,0 +1,33 @@
+1666800084a:1:{s:24:"menu\allergens.blade.php";a:5:{s:8:"fileName";s:24:"menu\allergens.blade.php";s:5:"mTime";i:1625018686;s:7:"content";s:644:"@foreach ($menuItem->allergens->where('status', 1) ?? [] as $allergen)
+    <a
+        class="badge {{ !($hasMedia = $allergen->hasMedia('thumb')) ? 'badge-light' : '' }} rounded m-1"
+        data-toggle="tooltip"
+        title="{{ $allergen->name }}: {{ $allergen->description }}"
+    >
+        @if ($hasMedia)
+            <img
+                class="img-responsive img-rounded"
+                alt="{{ $allergen->name }}"
+                src="{{ $allergen->getThumb(['width' => $menuAllergenImageWidth, 'height' => $menuAllergenImageHeight]) }}"
+            >
+        @else
+            {{ $allergen->name }}
+        @endif
+    </a>
+@endforeach";s:6:"markup";s:644:"@foreach ($menuItem->allergens->where('status', 1) ?? [] as $allergen)
+    <a
+        class="badge {{ !($hasMedia = $allergen->hasMedia('thumb')) ? 'badge-light' : '' }} rounded m-1"
+        data-toggle="tooltip"
+        title="{{ $allergen->name }}: {{ $allergen->description }}"
+    >
+        @if ($hasMedia)
+            <img
+                class="img-responsive img-rounded"
+                alt="{{ $allergen->name }}"
+                src="{{ $allergen->getThumb(['width' => $menuAllergenImageWidth, 'height' => $menuAllergenImageHeight]) }}"
+            >
+        @else
+            {{ $allergen->name }}
+        @endif
+    </a>
+@endforeach";s:4:"code";N;}}

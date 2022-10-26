@@ -1,0 +1,35 @@
+1666800084a:1:{s:22:"menu\default.blade.php";a:5:{s:8:"fileName";s:22:"menu\default.blade.php";s:5:"mTime";i:1625018686;s:7:"content";s:423:"@if (!$hideMenuSearch)
+    <div class="menu-search">
+        @partial('@searchbar')
+    </div>
+@endif
+
+<div class="menu-list">
+    @if ($menuIsGrouped)
+        @partial('menu/grouped', ['groupedMenuItems' => $menuList])
+    @else
+        @partial('menu/items', ['menuItems' => $menuList])
+    @endif
+
+    <div class="pagination-bar text-right">
+        <div class="links">{!! $menuList->links() !!}</div>
+    </div>
+</div>
+";s:6:"markup";s:423:"@if (!$hideMenuSearch)
+    <div class="menu-search">
+        @partial('@searchbar')
+    </div>
+@endif
+
+<div class="menu-list">
+    @if ($menuIsGrouped)
+        @partial('menu/grouped', ['groupedMenuItems' => $menuList])
+    @else
+        @partial('menu/items', ['menuItems' => $menuList])
+    @endif
+
+    <div class="pagination-bar text-right">
+        <div class="links">{!! $menuList->links() !!}</div>
+    </div>
+</div>
+";s:4:"code";N;}}

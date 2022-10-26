@@ -1,0 +1,10 @@
+1666800122a:1:{s:19:"not_found.blade.php";a:10:{s:8:"fileName";s:19:"not_found.blade.php";s:5:"mTime";i:1625018686;s:7:"content";s:151:"---
+title: 'Page Not Found'
+permalink: /404
+layout: static
+description: ''
+'[NotFoundPage]':
+    alias: '[NotFoundPage]'
+---
+@component('NotFoundPage')";s:6:"markup";s:27:"
+@component('NotFoundPage')";s:4:"code";N;s:5:"title";s:14:"Page Not Found";s:9:"permalink";s:4:"/404";s:6:"layout";s:6:"static";s:11:"description";s:0:"";s:14:"[NotFoundPage]";a:1:{s:5:"alias";s:14:"[NotFoundPage]";}}}

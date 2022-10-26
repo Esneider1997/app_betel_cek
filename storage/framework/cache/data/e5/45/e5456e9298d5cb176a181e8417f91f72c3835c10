@@ -1,0 +1,44 @@
+1666800122a:1:{s:14:"cart.blade.php";a:10:{s:8:"fileName";s:14:"cart.blade.php";s:5:"mTime";i:1625018686;s:7:"content";s:799:"---
+title: 'main::lang.cart.title'
+layout: default
+permalink: /cart
+'[localBox]': null
+'[cartBox]':
+    showCartItemThumb: 1
+    cartItemThumbWidth: !!float 720
+    cartItemThumbHeight: !!float 300
+    checkStockCheckout: 1
+    pageIsCheckout: 0
+    pageIsCart: 1
+    hideZeroOptionPrices: 0
+    checkoutPage: checkout/checkout
+    localBoxAlias: localBox
+---
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-lg-6 m-auto">
+            <div class="cart-buttons">
+                <a
+                    class="btn btn-link btn-block btn-md"
+                    href="{{ restaurant_url('local/menus') }}"
+                >@lang('igniter.cart::default.text_add_more_items')</a>
+            </div>
+
+            @partial('cartBox::container')
+        </div>
+    </div>
+</div>";s:6:"markup";s:440:"
+<div class="container">
+    <div class="row py-4">
+        <div class="col col-lg-6 m-auto">
+            <div class="cart-buttons">
+                <a
+                    class="btn btn-link btn-block btn-md"
+                    href="{{ restaurant_url('local/menus') }}"
+                >@lang('igniter.cart::default.text_add_more_items')</a>
+            </div>
+
+            @partial('cartBox::container')
+        </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:21:"main::lang.cart.title";s:6:"layout";s:7:"default";s:9:"permalink";s:5:"/cart";s:10:"[localBox]";N;s:9:"[cartBox]";a:9:{s:17:"showCartItemThumb";i:1;s:18:"cartItemThumbWidth";d:720;s:19:"cartItemThumbHeight";d:300;s:18:"checkStockCheckout";i:1;s:14:"pageIsCheckout";i:0;s:10:"pageIsCart";i:1;s:20:"hideZeroOptionPrices";i:0;s:12:"checkoutPage";s:17:"checkout/checkout";s:13:"localBoxAlias";s:8:"localBox";}}}
