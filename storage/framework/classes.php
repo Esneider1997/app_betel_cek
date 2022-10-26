@@ -134,4 +134,6 @@
   'cupnoodles\\taxclasses\\Controllers\\taxclasses' => 'extensions\\cupnoodles\\taxclasses\\controllers\\taxclasses.php',
   'igniter\\api\\Controllers\\resources' => 'extensions\\igniter\\api\\controllers\\resources.php',
   'Thoughtco\\Reports\\FormWidgets\\QueryBuilder' => 'extensions\\thoughtco\\reports\\formwidgets\\QueryBuilder.php',
+  'igniter\\pages\\Controllers\\menus' => 'extensions\\igniter\\pages\\controllers\\menus.php',
+  'CupNoodles\\TaxClasses\\Requests\\TaxClasses' => 'extensions\\cupnoodles\\taxclasses\\requests\\TaxClasses.php',
 );
